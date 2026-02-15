@@ -1,0 +1,276 @@
+:root {
+    --primary-color: #0066F5;
+    --secondary-color: #001B44;
+    --success-color: #00C853;
+    --warning-color: #FFB300;
+    --danger-color: #FF3D00;
+    --white: #ffffff;
+    --gray: #F5F8FF;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: var(--gray);
+    min-height: 100vh;
+}
+
+.results-container {
+    max-width: 1200px;
+    margin: 80px auto 2rem;
+    padding: 2rem;
+}
+
+.results-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    animation: fadeInDown 0.8s ease-out;
+}
+
+.results-header h1 {
+    color: var(--secondary-color);
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.results-header p {
+    color: #516B8C;
+    font-size: 1.1rem;
+}
+
+.results-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.image-section, .diagnosis-section {
+    background: var(--white);
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    animation: fadeInUp 0.8s ease-out;
+}
+
+.image-container {
+    width: 100%;
+    height: 400px;
+    overflow: hidden;
+    border-radius: 10px;
+    margin-top: 1rem;
+}
+
+.image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.diagnosis-container {
+    margin-top: 1rem;
+}
+
+.diagnosis-result {
+    margin-bottom: 2rem;
+}
+
+.diagnosis-result h3 {
+    color: var(--secondary-color);
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+.confidence-meter {
+    margin-top: 2rem;
+}
+
+.confidence-label {
+    margin-bottom: 0.5rem;
+    color: #516B8C;
+}
+
+.confidence-bar {
+    height: 10px;
+    background: #E0E7FF;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.confidence-level {
+    height: 100%;
+    background: var(--success-color);
+    width: 0;
+    transition: width 1s ease-in-out;
+}
+
+.confidence-percentage {
+    text-align: right;
+    margin-top: 0.5rem;
+    color: var(--success-color);
+    font-weight: 600;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 3rem;
+    animation: fadeInUp 0.8s ease-out 0.3s backwards;
+}
+
+.new-scan-btn, .download-btn {
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.new-scan-btn {
+    background: var(--primary-color);
+    color: var(--white);
+}
+
+.download-btn {
+    background: var(--white);
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+}
+
+.new-scan-btn:hover, .download-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 768px) {
+    .results-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .results-container {
+        padding: 1rem;
+        margin-top: 60px;
+    }
+
+    .action-buttons {
+        flex-direction: column;
+    }
+
+    .image-container {
+        height: 300px;
+    }
+}
+
+/* Add these styles to your existing results.css */
+
+.diagnosis-status {
+    padding: 2rem;
+    border-radius: 15px;
+    position: relative;
+    margin-bottom: 2rem;
+    animation: fadeIn 0.5s ease-out;
+}
+
+.diagnosis-status.positive {
+    background: rgba(255, 61, 0, 0.1);
+    border: 2px solid var(--danger-color);
+}
+
+.diagnosis-status.negative {
+    background: rgba(0, 200, 83, 0.1);
+    border: 2px solid var(--success-color);
+}
+
+.status-badge {
+    position: absolute;
+    top: -12px;
+    right: 20px;
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--white);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.positive .status-badge {
+    background: var(--danger-color);
+}
+
+.negative .status-badge {
+    background: var(--success-color);
+}
+
+.diagnosis-result h3 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    color: var(--secondary-color);
+}
+
+.diagnosis-details {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background: var(--white);
+    border-radius: 10px;
+}
+
+.diagnosis-details p {
+    margin-bottom: 0.8rem;
+    line-height: 1.6;
+    color: #516B8C;
+}
+
+.confidence-meter {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: var(--white);
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.positive .confidence-level {
+    background: var(--danger-color);
+}
+
+.negative .confidence-level {
+    background: var(--success-color);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
