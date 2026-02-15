@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration - Gleamer AI</title>
+    <link rel="stylesheet" href="/static/css/style-reg.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">
+            <img src="/static/css/logo.png" alt="Gleamer AI">
+            <span>Gleamer AI</span>
+        </div>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/doc">Doctors</a></li>
+            <li><a href="/reg">Registration</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Registration Form -->
+    <div class="registration-container">
+        <div class="form-header">
+            <h2>All information for you</h2>
+            <p>Join us to access all features of Gleamer AI</p>
+        </div>
+
+        <form id="signInForm" class="form-section">
+            <div class="input-group">
+                <label for="FullName">Full Name</label>
+                <input type="text" id="FullName" placeholder="Enter your full name" required>
+            </div>
+
+            <!-- After email input and before password input -->
+            <div class="input-group">
+                <label for="EmailAddress">Email Address</label>
+                <input type="email" id="EmailAddress" placeholder="Enter your email" required>
+            </div>
+
+            <div class="input-group photo-upload">
+                <label for="userPhoto">Profile Photo</label>
+                <div class="upload-container">
+                    <img id="photoPreview" src="/static/images/blue-circle-with-white-user.png" alt="Profile Preview">
+                    <input type="file" id="userPhoto" accept="image/*" required>
+                    <div class="upload-button">
+                        <i class="fas fa-camera"></i>
+                        Upload Photo
+                    </div>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" placeholder="Create a password" required>
+            </div>
+
+            <div class="input-group">
+                <label for="PhoneNumber">Phone Number</label>
+                <input type="tel" id="PhoneNumber" placeholder="Enter phone number" required>
+            </div>
+
+            <div class="input-group">
+                <label for="BirthDate">Birth Date</label>
+                <input type="date" id="BirthDate" required>
+            </div>
+
+            <div class="input-group">
+                <label for="Address">Address</label>
+                <input type="text" id="Address" placeholder="Enter your address" required>
+            </div>
+
+            <div class="input-group">
+                <label for="Country">Country</label>
+                <select id="Country" required>
+                    <option value="" disabled selected>Select your country</option>
+                    <option value="EG">Egypt</option>
+                    <option value="IQ">Iraq</option>
+                    <option value="AE">Emirates</option>
+                    <option value="QA">Qatar</option>
+                    <option value="KW">Kuwait</option>
+                    <option value="LB">Lebanon</option>
+                    <option value="SY">Syria</option>
+                    <option value="SA">Saudi Arabia</option>
+                    <option value="PS">Palestine</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label for="City">City</label>
+                <input type="text" id="City" placeholder="Enter your city" required>
+            </div>
+        </form>
+
+        <div class="gender-section">
+            <h3>Gender</h3>
+            <div class="gender-options">
+                <div class="gender-option">
+                    <input type="radio" id="male" name="gender" value="male">
+                    <label for="male">Male</label>
+                </div>
+                <div class="gender-option">
+                    <input type="radio" id="female" name="gender" value="female">
+                    <label for="female">Female</label>
+                </div>
+                <div class="gender-option">
+                    <input type="radio" id="other" name="gender" value="other">
+                    <label for="other">Prefer not to say</label>
+                </div>
+            </div>
+        </div>
+
+        <button type="submit" class="submit-btn">Create Account</button>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Gleamer AI. All rights reserved.</p>
+    </footer>
+
+    <script src="/static/js/login.js"></script>
+</body>
+</html>

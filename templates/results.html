@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Analysis Results - Gleamer AI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/results.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <a href="/" class="logo">
+                    <img src="{{ url_for('static', filename='css/logo.png') }}" alt="Logo">
+                    <span>Gleamer AI</span>
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/getStarted">Get Started</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/doc">Documentation</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="results-container">
+        <div class="results-header">
+            <h1>Analysis Results</h1>
+            <p>Here's what we found in your X-ray</p>
+        </div>
+
+        <div class="results-grid">
+            <div class="image-section">
+                <h2>Uploaded X-ray</h2>
+                <div class="image-container">
+                    <img id="uploadedImage" src="" alt="Uploaded X-ray">
+                </div>
+            </div>
+
+            <div class="diagnosis-section">
+                <h2>Diagnosis</h2>
+                <div class="diagnosis-container">
+                    <div id="diagnosisResult" class="diagnosis-result">
+                        <!-- Diagnosis will be inserted here -->
+                    </div>
+                    <div class="confidence-meter">
+                        <div class="confidence-label">Confidence Level:</div>
+                        <div class="confidence-bar">
+                            <div id="confidenceLevel" class="confidence-level"></div>
+                        </div>
+                        <div id="confidencePercentage" class="confidence-percentage">0%</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="action-buttons">
+            <button onclick="window.location.href='/getStarted'" class="new-scan-btn">
+                New Scan
+            </button>
+            <button onclick="downloadReport()" class="download-btn">
+                Download Report
+            </button>
+        </div>
+    </div>
+
+    <script>
+        window.onload = function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const imagePath = urlParams.get('image');
+            const diagnosis = JSON.parse(decodeURIComponent(urlParams.get('diagnosis')));
+    
+            // Set the image
+            document.getElementById('uploadedImage').src = imagePath;
+    
+            // Display diagnosis
+            const diagnosisResult = document.getElementById('diagnosisResult');
+            diagnosisResult.innerHTML = `
+                <!-- Update the diagnosis result section -->
+                <div id="diagnosisResult" class="diagnosis-result">
+                    <div class="diagnosis-status ${diagnosis.result.includes('No') ? 'negative' : 'positive'}">
+                        <div class="status-badge">
+                            ${diagnosis.result.includes('No') ? 'NEGATIVE' : 'POSITIVE'}
+                        </div>
+                        <h3>${diagnosis.result}</h3>
+                        <div class="diagnosis-details">
+                            <p>${diagnosis.description}</p>
+                        </div>
+
+                    </div>
+                </div>
+            `;
+    
+            // Animate confidence level
+            const confidence = diagnosis.confidence;
+            const confidenceLevel = document.getElementById('confidenceLevel');
+            const confidencePercentage = document.getElementById('confidencePercentage');
+            
+            setTimeout(() => {
+                confidenceLevel.style.width = `${confidence}%`;
+                confidencePercentage.textContent = `${confidence}%`;
+            }, 500);
+        }
+    
+        function downloadReport() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const diagnosis = JSON.parse(decodeURIComponent(urlParams.get('diagnosis')));
+            
+            const reportContent = `
+        Gleamer AI - X-Ray Analysis Report
+        Date: ${new Date().toLocaleDateString()}
+        Time: ${new Date().toLocaleTimeString()}
+    
+        Diagnosis Result: ${diagnosis.result}
+        Confidence Level: ${diagnosis.confidence}%
+    
+        Description:
+        ${diagnosis.description}
+    
+        Note: This is an AI-assisted analysis and should be reviewed by a medical professional.
+                `;
+    
+            const blob = new Blob([reportContent], { type: 'text/plain' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'xray-analysis-report.txt';
+            document.body.appendChild(a);
+            a.click();
+            window.URL.revokeObjectURL(url);
+            document.body.removeChild(a);
+        }
+    </script>
+</body>
+</html>

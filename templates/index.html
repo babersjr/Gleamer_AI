@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gleamer AI - Bone Health Assessment</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/index.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <img src="\static\css\logo.png" alt="Logo">
+            <span>Gleamer AI</span>
+        </div>
+    <ul>
+        <li><a href="{{ url_for('home') }}">Home</a></li>
+        <li><a href="{{ url_for('about') }}">About</a></li>
+        <li><a href="{{ url_for('doc') }}">Doctors</a></li>
+        <li><a href="{{ url_for('reg') }}">your info</a></li>
+        <li><a href="#">Team</a></li>
+        <li><a href="#">Contact</a></li>
+    </ul>
+
+        <div class="search-container">
+            <input type="search" class="search-bar" placeholder="Search...">
+        </div>
+        <a href="{{ url_for('sign_in') }}">
+            <button class="sign-in">Sign In</button>
+        </a>
+    </nav>
+    </nav>
+    <main class="hero">
+        <div class="hero-content">
+            <h1>Find Out <span class="highlight">How Healthy</span><br><span class="highlight">Your Bones Are</span></h1>
+            <p style="font-size: x-large;">Here you can find out if your bones are fine or not. If not, you can know the type of damage and its exact location, and you can also get a proposal for treatment. All you have to do is enter an x-ray of the bone you want to ensure its safety</p>
+           <a  href="{{ url_for('getStarted') }}">
+            <button  class="get-started">Get Started</button>
+        </a> 
+        </div>
+        <div class="hero-image">
+            <img src="/static/css/medical-illustration.png" alt="Medical X-ray Analysis">
+        </div>
+    </main>
+
+    <section class="features">
+        <h2>Why Choose Us?</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <img src="/static/images/home-2.svg" alt="Accuracy">
+                <h3>High Accuracy</h3>
+                <p>Advanced AI algorithms ensure precise bone fracture detection and analysis</p>
+            </div>
+            <div class="feature-card">
+                <img src="/static/images/fast.svg" alt="Speed">
+                <h3>Fast Results</h3>
+                <p>Get instant analysis and detailed reports within seconds</p>
+            </div>
+            <div class="feature-card">
+                <img src="/static/images/secure.svg" alt="Security">
+                <h3>Secure & Private</h3>
+                <p>Your medical data is protected with enterprise-grade security</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="how-it-works">
+        <h2>How It Works</h2>
+        <div class="steps-container">
+            <div class="step">
+                <div class="step-number">1</div>
+                <h3>Upload X-ray</h3>
+                <p>Simply upload your X-ray image to our secure platform</p>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <h3>AI Analysis</h3>
+                <p>Our AI system analyzes the image for potential fractures</p>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <h3>Get Results</h3>
+                <p>Receive detailed analysis and recommendations instantly</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="stats">
+        <div class="stat-card">
+            <h3>95%</h3>
+            <p style="color: white;">Accuracy Rate</p>
+        </div>
+        <div class="stat-card">
+            <h3>10K+</h3>
+            <p style="color: white;">X-rays Analyzed</p>
+        </div>
+        <div class="stat-card">
+            <h3>1000+</h3>
+            <p style="color: white;">Healthcare Providers</p>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Gleamer AI</h4>
+                <p>Advanced bone fracture detection using artificial intelligence</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ol>
+                    <li><a href="/about">About Us</a></li>
+                    <li><a href="/contact">Contact</a></li>
+                    <li><a href="/privacy">Privacy Policy</a></li>
+                    <li><a href="/terms">Terms of Service</a></li>
+                </ol>
+            </div>
+            <div class="footer-section">
+                <h4>Contact Us</h4>
+                <p>Email: info@gleamerai.com</p>
+                <p>Phone: +1 (555) 123-4567</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Gleamer AI. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Get Started</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/getStarted.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <!-- Fix logo path -->
+            <div class="logo">
+                <a href="/">
+                    <img src="{{ url_for('static', filename='css/logo.png') }}" alt="Logo">
+                    <span style="color: rgb(21, 57, 148);">Gleamer AI</span>
+                </a>
+            </div>
+
+            <!-- Fix medical illustration path -->
+
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/getStarted">Get Started</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/doc">doctors</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="upload-section">
+            <div class="left-section">
+                <img src="{{ url_for('static', filename='css/medical-illustration.png') }}" alt="Medical Illustration" class="medical-img">
+            </div>
+            <div class="right-section">
+                <h1>Fill the Required Data</h1>
+                <p class="subtitle">You can upload your X-RAY here</p>
+                
+                <div class="upload-container">
+                    <div class="upload-box">
+                        <form id="uploadForm" enctype="multipart/form-data">
+                            <div class="file-upload">
+                                <input type="file" id="xrayFile" name="file" accept=".jpg,.jpeg,.png" class="file-input">
+                                <label for="xrayFile" class="file-label">
+                                    <img src="{{ url_for('static', filename='images/upload_10975828.png') }}" alt="Upload" class="upload-icon">
+                                    <span class="upload-text">Choose X-Ray File</span>
+                                    <span class="file-types">Supported formats: JPG, JPEG, PNG</span>
+                                </label>
+                            </div>
+                            <div id="file-name" class="file-name"></div>
+                            <button type="button" onclick="uploadImage()" class="upload-button">
+                                <span class="button-text">Upload</span>
+                                <span class="loading-spinner"></span>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    document.getElementById('xrayFile').addEventListener('change', function(e) {
+        const fileName = e.target.files[0]?.name;
+        document.getElementById('file-name').textContent = fileName || '';
+    });
+
+    function uploadImage() {
+        const fileInput = document.getElementById('xrayFile');
+        if (!fileInput.files.length) {
+            alert('Please select a file first');
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append('file', fileInput.files[0]);
+
+        const uploadButton = document.querySelector('.upload-button');
+        uploadButton.disabled = true;
+        uploadButton.textContent = 'Uploading...';
+
+        fetch('/upload', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                window.location.href = `/results?image=${data.file_path}&diagnosis=${encodeURIComponent(JSON.stringify(data.diagnosis))}`;
+            } else {
+                alert('Error: ' + data.error);
+                uploadButton.disabled = false;
+                uploadButton.textContent = 'Upload';
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('An error occurred during upload');
+            uploadButton.disabled = false;
+            uploadButton.textContent = 'Upload';
+        });
+    }
+    </script>
+</body>
+</html>
